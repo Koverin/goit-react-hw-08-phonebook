@@ -1,11 +1,11 @@
 import shortid from 'shortid';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormBox, Input } from './Form.styled';
+import { FormBox, Input } from './ContactForm.styled';
 import { addContactThunk } from 'redux/asyncThunk';
 import { selectContacts } from 'redux/selector';
 import { useState } from 'react';
 
-export function Form() {
+export function ContactForm() {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const [name, setName] = useState('');
