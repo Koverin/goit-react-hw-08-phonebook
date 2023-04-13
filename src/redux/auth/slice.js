@@ -9,12 +9,12 @@ const initialState = {
   error: null,
 };
 
-const statePending = state => {
+const handlePending = state => {
   state.isLoading = true;
   state.error = null;
 };
 
-const stateRejected = (state, { payload }) => {
+const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
 };
@@ -50,8 +50,8 @@ const authSlice = createSlice({
       .addCase(refreshUser.rejected, state => {
         state.isRefreshing = false;
       })
-      .addMatcher(action => action.type.endsWith('/pending'), statePending)
-      .addMatcher(action => action.type.endsWith('/rejected'), stateRejected);
+      .addMatcher(action => action.type.endsWith('/pending'), handlePending)
+      .addMatcher(action => action.type.endsWith('/rejected'), handleRejected);
   },
 });
 

@@ -15,38 +15,40 @@ const contactSlice = createSlice({
       .addCase(getContactsThunk.pending, state => {
         state.isLoading = true;
       })
-      .addCase(getContactsThunk.fulfilled, (state, actions) => {
-        state.isLoading = false;
+      .addCase(getContactsThunk.fulfilled, (state, action) => {
+        state.items = action.payload;
         state.error = null;
-        state.items = actions.payload;
-      })
-      .addCase(getContactsThunk.rejected, (state, actions) => {
         state.isLoading = false;
-        state.error = actions.payload;
       })
+      .addCase(getContactsThunk.rejected, (state, action) => {
+        state.error = action.payload;
+        state.isLoading = false;
+      })
+
       .addCase(deleteContactThunk.pending, state => {
         state.isLoading = true;
       })
-      .addCase(deleteContactThunk.fulfilled, (state, actions) => {
-        state.isLoading = false;
+      .addCase(deleteContactThunk.fulfilled, (state, action) => {
+        state.items = state.items.filter(item => item.id !== action.payload.id);
         state.error = null;
-        state.items = state.items.filter(item => item.id !== actions.payload);
-      })
-      .addCase(deleteContactThunk.rejected, (state, actions) => {
         state.isLoading = false;
-        state.error = actions.payload;
       })
+      .addCase(deleteContactThunk.rejected, (state, action) => {
+        state.error = action.payload;
+        state.isLoading = false;
+      })
+
       .addCase(addContactThunk.pending, state => {
         state.isLoading = true;
       })
-      .addCase(addContactThunk.fulfilled, (state, actions) => {
-        state.isLoading = false;
+      .addCase(addContactThunk.fulfilled, (state, action) => {
+        state.items = [action.payload, ...state.items];
         state.error = null;
-        state.items = [actions.payload, ...state.items];
-      })
-      .addCase(addContactThunk.rejected, (state, actions) => {
         state.isLoading = false;
-        state.error = actions.payload;
+      })
+      .addCase(addContactThunk.rejected, (state, action) => {
+        state.error = action.payload;
+        state.isLoading = false;
       });
   },
 });

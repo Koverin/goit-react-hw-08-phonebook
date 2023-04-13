@@ -9,9 +9,9 @@ export function Filter() {
 
   return (
     <label>
-      Find contacts by name
       <Input
         type="text"
+        placeholder="Find contacts by name..."
         value={filter}
         onChange={evt => dispatch(filterContacts(evt.target.value))}
       />

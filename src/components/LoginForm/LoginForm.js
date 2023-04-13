@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading } from 'redux/selector';
-import { logIn } from '../../redux/auth/operation';
+import { logIn } from 'redux/auth/operation';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
